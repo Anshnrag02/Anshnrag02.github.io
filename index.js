@@ -13,6 +13,7 @@ const fetchData = async searchTerm => {
     return response.data.Search;
   };
   
+
   const root = document.querySelector('.autocomplete');
   root.innerHTML = `
     <label><b>Search For a Movie</b></label>
@@ -24,6 +25,7 @@ const fetchData = async searchTerm => {
     </div>
   `;
   
+
   const input = document.querySelector('input');
   const dropdown = document.querySelector('.dropdown');
   const resultsWrapper = document.querySelector('.results');
@@ -47,10 +49,16 @@ const fetchData = async searchTerm => {
         <img src="${imgSrc}" />
         ${movie.Title}
       `;
+      option.addEventListener('click',() => {
+        dropdown.classList.remove('is-active');
+        input.value = movie.Title;
+        onMovieSelect(movie);
+      });
   
       resultsWrapper.appendChild(option);
     }
   };
+
   input.addEventListener('input', debounce(onInput, 500));
   
   document.addEventListener('click', event => {
@@ -58,3 +66,6 @@ const fetchData = async searchTerm => {
       dropdown.classList.remove('is-active');
     }
   });
+
+  const onMovieSelect = (movie) =>{
+  }
