@@ -1,8 +1,8 @@
-const fetchData = async searchTerm => {
-    const response = await axios.get('http://www.omdbapi.com/', {
-      params: {
-        apikey: 'd9835cc5',
-        s: searchTerm
+  const fetchData = async searchTerm => {
+      const response = await axios.get('http://www.omdbapi.com/', {
+        params: {
+          apikey: 'd9835cc5',
+          s: searchTerm
       }
     });
   
@@ -55,7 +55,7 @@ const fetchData = async searchTerm => {
         onMovieSelect(movie);
       });
   
-      resultsWrapper.appendChild(option);
+    resultsWrapper.appendChild(option);
     }
   };
 
@@ -67,5 +67,32 @@ const fetchData = async searchTerm => {
     }
   });
 
-  const onMovieSelect = (movie) =>{
+  const onMovieSelect = async (movie) =>{
+    const response = await axios.get('http://www.omdbapi.com/', {
+      params: {
+        apikey: 'd9835cc5',
+        i: movie.imdbID
+      } 
+    });
+    console.log(response.data);
+    document.querySelector('.summary').innerHTML = movieTemplate(response.data);
+  };
+
+  const movieTemplate = (movieDetail) =>{
+    return `
+    <article class="media">
+      <figure class="media-left">
+        <p class="image">
+          <img src="${movieDetail.Poster}">
+        </p>
+      </figure>
+      <div class="media-content">
+        <div class="content">
+          <h1>${movieDetail.Title}</h1>
+          <h4>${movieDetail.Genre}</h4>
+          <p>${movieDetail.Plot}</p>
+        </div>
+      </div>
+    </article>
+    `;
   }
