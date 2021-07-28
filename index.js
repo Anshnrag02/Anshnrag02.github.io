@@ -5,26 +5,14 @@ const fetchData = async (searchquery) => {
             s: searchquery,
         }
     });
-
-    console.log(response.data);
+    return response.data.Search;
 }
 
 const input = document.querySelector('input');
 
-const debounce = (func,time) => {
-    let timeoutId;
-    return(...args) => {
-        if(timeoutId){
-            clearTimeout(timeoutId);
-        }
-        timeoutId = setTimeout(() => {
-            func.apply(null,args);
-        },time);
-    };
-};
-
-const oninput = Event => {
-    fetchData(Event.target.value);
+const oninput = async Event => {
+    const movies = await fetchData(Event.target.value);
+    console.log(movies);
 }
 
 input.addEventListener('input', debounce(oninput,1000));
