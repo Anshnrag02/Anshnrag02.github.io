@@ -94,5 +94,25 @@
         </div>
       </div>
     </article>
+    <article class="notification is-primary">
+  <p class="title">${movieDetail.Awards}</p>
+  <p class="title">Awards</p>
+</article>
+<article class="notification is-primary">
+  <p class="title">${movieDetail.BoxOffice}</p>
+  <p class="title">Box Office</p>
+</article>
+<article class="notification is-primary">
+  <p class="title">${movieDetail.Metascore}</p>
+  <p class="title">Metascore</p>
+</article>
+<article class="notification is-primary">
+  <p class="title">${movieDetail.imdbRating}</p>
+  <p class="title">IMDB Rating</p>
+</article>
+<article class="notification is-primary">
+  <p class="title">${movieDetail.imdbVotes}</p>
+  <p class="title">IMdb Votes</p>
+</article>
     `;
   }
