@@ -65,7 +65,7 @@ const onMovieSelect = async (movie, summaryElement, side) =>{
   }
 
   if(leftMovie && rightMovie){
-    runComparison(leftMovie,rightMovie);
+    runComparison();
   }
 };
 
@@ -82,8 +82,8 @@ const runComparison = ()=>{
       leftStat.classList.remove("is-primary");
       leftStat.classList.remove("is-warning");
     }else{
-      leftStat.classList.remove("is-primary");
-      leftStat.classList.remove("is-warning");
+      rightStat.classList.remove("is-primary");
+      rightStat.classList.remove("is-warning");
     }
 
   });
@@ -98,7 +98,7 @@ const movieTemplate = (movieDetail) =>{
     const imdbRating=parseFloat(movieDetail.imdbRating);
     const votes= parseInt(movieDetail.imdbVotes.replace(/,/,''));
     let count=0;
-    const awards = movieDetail.awards.split(' ').reduce( (prev,word) => {
+    const awards = movieDetail.Awards.split(' ').reduce( (prev,word) => {
       const value= parseInt(word);
       if(isNaN(value)){
         return prev;
