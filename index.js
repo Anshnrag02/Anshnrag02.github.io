@@ -65,13 +65,14 @@ const onMovieSelect = async (movie, summaryElement, side) =>{
   }
 
   if(leftMovie && rightMovie){
-    runComparison();
+    const leftSideStats = document.querySelectorAll('#left-summary .notification');
+    const rightSideStats = document.querySelectorAll('#right-summary .notification');
+    
+    runComparison(leftSideStats,rightSideStats);
   }
 };
 
-const runComparison = ()=>{
-  const leftSideStats = document.querySelectorAll('#left-summary .notification');
-  const rightSideStats = document.querySelectorAll('#right-summary .notification');
+const runComparison = (leftSideStats,rightSideStats)=>{  
 
   leftSideStats.forEach((leftStat,index)=>{
     const rightStat = rightSideStats[index];
@@ -80,10 +81,14 @@ const runComparison = ()=>{
 
     if(rightSideValue>leftSideValue) {
       leftStat.classList.remove("is-primary");
-      leftStat.classList.remove("is-warning");
+      leftStat.classList.add("is-warning");
+      rightStat.classList.add("is-primary");
+      rightStat.classList.remove("is-warning");
     }else{
       rightStat.classList.remove("is-primary");
-      rightStat.classList.remove("is-warning");
+      rightStat.classList.add("is-warning");
+      leftStat.classList.add("is-primary");
+      leftStat.classList.remove("is-warning");
     }
 
   });
