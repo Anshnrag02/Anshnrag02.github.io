@@ -96,7 +96,7 @@ const movieTemplate = (movieDetail) =>{
     const dollars = parseInt(movieDetail.BoxOffice.replace(/\$/g,'').replace(/,/g,''));
     const Metascore=parseInt(movieDetail.Metascore);
     const imdbRating=parseFloat(movieDetail.imdbRating);
-    const votes= parseInt(movieDetail.imdbVotes.replace(/,/,''));
+    const votes= parseInt(movieDetail.imdbVotes.replace(/,/g,''));
     let count=0;
     const awards = movieDetail.Awards.split(' ').reduce( (prev,word) => {
       const value= parseInt(word);
