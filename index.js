@@ -65,30 +65,38 @@ const onMovieSelect = async (movie, summaryElement, side) =>{
   }
 
   if(leftMovie && rightMovie){
-    const leftSideStats = document.querySelectorAll('#left-summary .notification');
-    const rightSideStats = document.querySelectorAll('#right-summary .notification');
-    
-    runComparison(leftSideStats,rightSideStats);
+    runComparison();
   }
 };
 
-const runComparison = (leftSideStats,rightSideStats)=>{  
+const runComparison = ()=>{  
+
+  const leftSideStats = document.querySelectorAll('#left-summary .notification');
+  const rightSideStats = document.querySelectorAll('#right-summary .notification');
+    
 
   leftSideStats.forEach((leftStat,index)=>{
     const rightStat = rightSideStats[index];
     const leftSideValue = leftStat.dataset.value;
     const rightSideValue = rightStat.dataset.value;
 
-    if(rightSideValue>leftSideValue) {
+    if(parseFloat(rightSideValue)>parseFloat(leftSideValue)) {
+      console.log(rightSideValue);
+      console.log(leftSideValue);
       leftStat.classList.remove("is-primary");
-      leftStat.classList.add("is-warning");
+      // leftStat.classList.add("is-warning");
       rightStat.classList.add("is-primary");
-      rightStat.classList.remove("is-warning");
-    }else{
+      // rightStat.classList.remove("is-warning");
+    }else if (parseFloat(rightSideValue)<parseFloat(leftSideValue)){
       rightStat.classList.remove("is-primary");
-      rightStat.classList.add("is-warning");
+      // rightStat.classList.add("is-warning");
       leftStat.classList.add("is-primary");
-      leftStat.classList.remove("is-warning");
+      // leftStat.classList.remove("is-warning");
+    }
+    else{
+      rightStat.classList.remove("is-primary");
+      // rightStat.classList.add("is-warning");
+      leftStat.classList.remove("is-primary");
     }
 
   });
@@ -98,11 +106,23 @@ const runComparison = (leftSideStats,rightSideStats)=>{
 const movieTemplate = (movieDetail) =>{
 
 
-    const dollars = parseInt(movieDetail.BoxOffice.replace(/\$/g,'').replace(/,/g,''));
-    const Metascore=parseInt(movieDetail.Metascore);
-    const imdbRating=parseFloat(movieDetail.imdbRating);
-    const votes= parseInt(movieDetail.imdbVotes.replace(/,/g,''));
-    let count=0;
+    let dollars = parseFloat(movieDetail.BoxOffice.replace(/\$/g,'').replace(/,/g,''));
+    console.log(dollars);
+    if(isNaN(dollars)){
+      dollars=0;
+    }
+    let Metascore=parseInt(movieDetail.Metascore);
+    if(isNaN(Metascore)){
+      Metascore=0;
+    }
+    let imdbRating=parseFloat(movieDetail.imdbRating);
+    if(isNaN(imdbRating)){
+      imdbRating=0;
+    }
+    let votes= parseInt(movieDetail.imdbVotes.replace(/,/g,''));
+    if(isNaN(votes)){
+      votes=0;
+    }
     const awards = movieDetail.Awards.split(' ').reduce( (prev,word) => {
       const value= parseInt(word);
       if(isNaN(value)){
